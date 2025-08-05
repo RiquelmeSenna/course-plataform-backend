@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               Int              @id @default(autoincrement())
+  type             Type             @default(Student)
+  name             String
+  cpf              String           @unique
+  email            String           @unique
+  password         String
+  stripeCustomerId String?
+  profileImage     String?
+  Courses          Course[]
+  Enrollment       Enrollment[]
+  ModuleProgress   ModuleProgress[]
+  Rating           Rating[]
+  VideoProgress    VideoProgress[]
+}
+
+model Course {
+  id              Int            @id @default(autoincrement())
+  name            String
+  price           Int
+  description     String
+  teacherId       Int
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  categoryId      Int
+  concluded       Boolean        @default(false)
+  stripeProductId String
+  category        CourseCategory @relation(fields: [categoryId], references: [id])
+  teacher         User           @relation(fields: [teacherId], references: [id])
+  Enrollment      Enrollment[]
+  Module          Module[]
+  Rating          Rating[]
+}
+
+model CourseCategory {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  Courses     Course[]
+}
+
+model Module {
+  id             Int              @id @default(autoincrement())
+  name           String
+  description    String
+  courseId       Int
+  course         Course           @relation(fields: [courseId], references: [id])
+  ModuleProgress ModuleProgress[]
+  Video          Video[]
+}
+
+model ModuleProgress {
+  id        Int     @id @default(autoincrement())
+  studentId Int
+  moduleId  Int
+  finished  Boolean @default(false)
+  module    Module  @relation(fields: [moduleId], references: [id])
+  student   User    @relation(fields: [studentId], references: [id])
+
+  @@unique([studentId, moduleId])
+}
+
+model Video {
+  id            Int             @id @default(autoincrement())
+  name          String
+  description   String
+  url           String
+  duration      Int
+  moduleId      Int
+  module        Module          @relation(fields: [moduleId], references: [id])
+  VideoProgress VideoProgress[]
+}
+
+model VideoProgress {
+  id        Int     @id @default(autoincrement())
+  studentId Int
+  videoId   Int
+  finished  Boolean @default(false)
+  progress  Int
+  student   User    @relation(fields: [studentId], references: [id])
+  video     Video   @relation(fields: [videoId], references: [id])
+
+  @@unique([studentId, videoId])
+}
+
+model Enrollment {
+  id        Int    @id @default(autoincrement())
+  courseId  Int
+  studentId Int
+  course    Course @relation(fields: [courseId], references: [id])
+  student   User   @relation(fields: [studentId], references: [id])
+}
+
+model Rating {
+  id        Int     @id @default(autoincrement())
+  courseId  Int
+  studentId Int
+  rating    Int
+  comment   String?
+  course    Course  @relation(fields: [courseId], references: [id])
+  student   User    @relation(fields: [studentId], references: [id])
+}
+
+enum Type {
+  Student
+  Teacher
+  Admin
+}

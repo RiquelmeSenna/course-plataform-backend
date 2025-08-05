@@ -1,0 +1,69 @@
+Banco de dados : 
+    User : 
+        id : number
+        Type : @default(Student)
+        name : String
+        CPF : String
+        email : String
+        password : String
+    ----------------------------------------------
+    Enum Type : 
+        Student 
+        Teacher 
+        Admin
+    ----------------------------------------------
+    ModuleProgress:
+        id : number
+        studentId : number
+        moduleId : number
+        finished: boolean
+    ----------------------------------------------- 
+    Course : 
+        id : number
+        name : String
+        price : number
+        description : String
+        TeacherId : number
+        createdAt : Date
+        updatedAt : Date
+        modules : [] modules
+        students : [] students
+    -----------------------------------------------
+    Module : 
+        id : number
+        name : String
+        description : String
+        CourseId : number
+        videos : [] videos
+        finished : boolean
+        students : [] students
+    -----------------------------------------------
+    Video : 
+        id : number
+        name : String
+        description : String
+        ModuleId : number
+        url : String
+        duration : number
+    ---------------------------------------------
+    VideoProgress:
+        id : number
+        studentId : number
+        videoId : number
+        finished: boolean
+        progress: number
+    --------------------------------------------------
+    Enrollment : 
+        id : number
+        CourseId : number
+        StudentId : number
+        Conclusion : boolean
+    -------------------------------------------------
+    Rating : 
+        id : number
+        CourseId : number
+        StudentId : number
+        rating : number
+        comment? : String
+    ------------------------------------------------
+        

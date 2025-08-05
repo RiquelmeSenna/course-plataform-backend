@@ -1,0 +1,59 @@
+Rotas :
+    Tela inicial :
+        / : GET -> Rota Home
+        
+        
+    Autenticação : 
+        /auth/signin: POST -> Rota de Login
+        /auth/signup : POST -> Rota de Cadastro
+        /auth/forgot-password : POST -> Rota de Esqueci minha senha
+        /auth/change-password : POST -> Rota de Alterar senha
+    
+    User : 
+        /users/me : GET -> Rota de usuario logado
+        /users/:id : GET -> Rota de usuario
+        /users/me : PUT -> Rota de Atualizar usuario por ID
+        /users/me : DELETE -> Rota de Deletar usuario por ID
+        
+    Cursos :
+        /courses : GET -> Rotas de Cursos
+        /courses/:id : GET -> Rota de Cursos por ID
+        /courses : POST -> Rota de Criar Cursos
+        /courses/:id : PUT -> Rota de Atualizar Cursos por ID
+        /courses/:id : DELETE -> Rota de Deletar Cursos por ID
+        /courses/search?nome-do-curso : GET -> Rota de Pesquisar Cursos
+        /courses/:id/reviews : GET -> Rota de Reviews por ID do curso
+        /courses/:id/modules : GET -> Rota de Modulos por ID do curso
+        /courses/:id/enrollment/ : GET -> Rota de Inscrições por ID do curso
+        
+
+    Categorias : 
+        /categories : GET -> Rota de Categorias
+        /categories/:id : GET -> Rota de Categorias por ID
+        /categories/:id : PUT -> Rota de Atualizar Categorias por ID
+        /categories/:id : DELETE -> Rota de Deletar Categorias por ID
+        /categories : POST -> Rota de Criar Categorias
+        /categories/search?nome-da-categoria : GET -> Rota de Pesquisar Categorias
+
+    Modules : 
+        /modules/:id : GET -> Rota de Modulos por ID do modulo
+        /modules : POST -> Rota de Criar Modulos
+        /modules/:id : PUT -> Rota de Atualizar Modulos por ID do modulo
+        /modules/:id : DELETE -> Rota de Deletar Modulos por ID do modulo
+
+    Video : 
+        /videos/:id GET -> Rota de pegar o video
+        /videos : POST -> Rota de Criar Videos
+        /videos/:id-do-video : PUT -> Rota de Atualizar Videos por ID do video
+        /videos/:id-do-video : DELETE -> Rota de Deletar Videos por ID do video
+    
+    Enrollment : 
+        /enrollment : POST -> Rota de Criar Inscrições
+        /enrollment/:courseId : GET -> Rota de Inscrições por ID do aluno
+        /enrollment/:id-da-inscricao : PUT -> Rota de Atualizar Inscrições por ID da inscrição
+        /enrollment/:id-da-inscricao : DELETE -> Rota de Deletar Inscrições por ID da inscrição
+
+    Reviews : 
+        /reviews : POST -> Rota de Criar Reviews
+        /reviews/id-do-review : PUT -> Rota de Atualizar Reviews por ID do curso e ID do review
+        /reviews/id-do-review : DELETE -> Rota de Deletar Reviews por ID do curso e ID do review
